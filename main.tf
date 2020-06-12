@@ -34,7 +34,7 @@ resource "aws_eip" "nat-ip" {
 resource "aws_nat_gateway" "main" {
   count         = length(var.internal_subnets) > 0 ? 1 : 0
   allocation_id = aws_eip.nat-ip.id
-  subnet_id     = element(aws_subnet.external.*.id, 1)
+  subnet_id     = element(aws_subnet.external.*.id, 0)
   depends_on = [
     aws_internet_gateway.main,
     aws_subnet.external,
